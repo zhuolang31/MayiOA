@@ -1,0 +1,741 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MayiOAModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="MayiOAModelStoreContainer">
+          <EntitySet Name="Clients" EntityType="MayiOAModel.Store.Clients" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GroupMessages" EntityType="MayiOAModel.Store.GroupMessages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GroupNotice" EntityType="MayiOAModel.Store.GroupNotice" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GroupNoticeComments" EntityType="MayiOAModel.Store.GroupNoticeComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GroupResources" EntityType="MayiOAModel.Store.GroupResources" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Groups" EntityType="MayiOAModel.Store.Groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GroupUsers" EntityType="MayiOAModel.Store.GroupUsers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="MayiOAModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="MayiOAModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_GroupMessages_Users" Association="MayiOAModel.Store.FK_GroupMessages_Users">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupMessages" EntitySet="GroupMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupNotice_Groups" Association="MayiOAModel.Store.FK_GroupNotice_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupNotice" EntitySet="GroupNotice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupNoticeComments_GroupNoticeComments" Association="MayiOAModel.Store.FK_GroupNoticeComments_GroupNoticeComments">
+            <End Role="GroupNotice" EntitySet="GroupNotice" />
+            <End Role="GroupNoticeComments" EntitySet="GroupNoticeComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupResources_Groups" Association="MayiOAModel.Store.FK_GroupResources_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupResources" EntitySet="GroupResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Clients" Association="MayiOAModel.Store.FK_Groups_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Users" Association="MayiOAModel.Store.FK_Groups_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupUsers_Groups1" Association="MayiOAModel.Store.FK_GroupUsers_Groups1">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupUsers" EntitySet="GroupUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Clients" Association="MayiOAModel.Store.FK_Users_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientCode" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ClientName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ClientType" Type="varchar" MaxLength="50" />
+          <Property Name="ConfigID" Type="int" />
+        </EntityType>
+        <EntityType Name="GroupMessages">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="Contents" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateOn" Type="datetime" />
+          <Property Name="LastModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastModifyOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GroupNotice">
+          <Key>
+            <PropertyRef Name="GroupNoticeID" />
+          </Key>
+          <Property Name="GroupNoticeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="NoticeContent" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateOn" Type="datetime" />
+          <Property Name="LastModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastModifyOn" Type="datetime" />
+          <Property Name="SoftDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="GroupNoticeComments">
+          <Key>
+            <PropertyRef Name="NoticeCommentID" />
+          </Key>
+          <Property Name="NoticeCommentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="GroupNoticeID" Type="int" Nullable="false" />
+          <Property Name="Contents" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateOn" Type="datetime" />
+          <Property Name="LastModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastModifyOn" Type="datetime" />
+          <Property Name="SoftDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="GroupResources">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="ResourceName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ResourceUrl" Type="varchar" MaxLength="50" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateOn" Type="datetime" />
+          <Property Name="LastModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastModifyOn" Type="datetime" />
+          <Property Name="SoftDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="GroupType" Type="varchar" MaxLength="50" />
+          <Property Name="IsHidden" Type="bit" Nullable="false" />
+          <Property Name="CreateUserID" Type="int" Nullable="false" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateOn" Type="datetime" />
+          <Property Name="LastModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastModifyOn" Type="datetime" />
+          <Property Name="SoftDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="GroupUsers">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateOn" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="NickName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Avatar" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateOn" Type="datetime" />
+          <Property Name="LastModifyBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastModifyOn" Type="datetime" />
+          <Property Name="SoftDelete" Type="bit" />
+          <Property Name="QQ" Type="varchar" MaxLength="50" />
+          <Property Name="Weibo" Type="varchar" MaxLength="50" />
+          <Property Name="Wechat" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_GroupMessages_Users">
+          <End Role="Groups" Type="MayiOAModel.Store.Groups" Multiplicity="1" />
+          <End Role="GroupMessages" Type="MayiOAModel.Store.GroupMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupMessages">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupNotice_Groups">
+          <End Role="Groups" Type="MayiOAModel.Store.Groups" Multiplicity="1" />
+          <End Role="GroupNotice" Type="MayiOAModel.Store.GroupNotice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupNotice">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupNoticeComments_GroupNoticeComments">
+          <End Role="GroupNotice" Type="MayiOAModel.Store.GroupNotice" Multiplicity="1" />
+          <End Role="GroupNoticeComments" Type="MayiOAModel.Store.GroupNoticeComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupNotice">
+              <PropertyRef Name="GroupNoticeID" />
+            </Principal>
+            <Dependent Role="GroupNoticeComments">
+              <PropertyRef Name="GroupNoticeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupResources_Groups">
+          <End Role="Groups" Type="MayiOAModel.Store.Groups" Multiplicity="1" />
+          <End Role="GroupResources" Type="MayiOAModel.Store.GroupResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupResources">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Clients">
+          <End Role="Clients" Type="MayiOAModel.Store.Clients" Multiplicity="1" />
+          <End Role="Groups" Type="MayiOAModel.Store.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Users">
+          <End Role="Users" Type="MayiOAModel.Store.Users" Multiplicity="1" />
+          <End Role="Groups" Type="MayiOAModel.Store.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="CreateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupUsers_Groups1">
+          <End Role="Groups" Type="MayiOAModel.Store.Groups" Multiplicity="1" />
+          <End Role="GroupUsers" Type="MayiOAModel.Store.GroupUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupUsers">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Clients">
+          <End Role="Clients" Type="MayiOAModel.Store.Clients" Multiplicity="1" />
+          <End Role="Users" Type="MayiOAModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MayiOAModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MayiOAEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="MayiOAModel.Clients" />
+          <EntitySet Name="GroupMessages" EntityType="MayiOAModel.GroupMessages" />
+          <EntitySet Name="GroupNotice" EntityType="MayiOAModel.GroupNotice" />
+          <EntitySet Name="GroupNoticeComments" EntityType="MayiOAModel.GroupNoticeComments" />
+          <EntitySet Name="GroupResources" EntityType="MayiOAModel.GroupResources" />
+          <EntitySet Name="Groups" EntityType="MayiOAModel.Groups" />
+          <EntitySet Name="GroupUsers" EntityType="MayiOAModel.GroupUsers" />
+          <EntitySet Name="sysdiagrams" EntityType="MayiOAModel.sysdiagrams" />
+          <EntitySet Name="Users" EntityType="MayiOAModel.Users" />
+          <AssociationSet Name="FK_Groups_Clients" Association="MayiOAModel.FK_Groups_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Clients" Association="MayiOAModel.FK_Users_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupMessages_Users" Association="MayiOAModel.FK_GroupMessages_Users">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupMessages" EntitySet="GroupMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupNotice_Groups" Association="MayiOAModel.FK_GroupNotice_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupNotice" EntitySet="GroupNotice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupNoticeComments_GroupNoticeComments" Association="MayiOAModel.FK_GroupNoticeComments_GroupNoticeComments">
+            <End Role="GroupNotice" EntitySet="GroupNotice" />
+            <End Role="GroupNoticeComments" EntitySet="GroupNoticeComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupResources_Groups" Association="MayiOAModel.FK_GroupResources_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupResources" EntitySet="GroupResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupUsers_Groups1" Association="MayiOAModel.FK_GroupUsers_Groups1">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="GroupUsers" EntitySet="GroupUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Users" Association="MayiOAModel.FK_Groups_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ClientName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ClientType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ConfigID" Type="Int32" />
+          <NavigationProperty Name="Groups" Relationship="MayiOAModel.FK_Groups_Clients" FromRole="Clients" ToRole="Groups" />
+          <NavigationProperty Name="Users" Relationship="MayiOAModel.FK_Users_Clients" FromRole="Clients" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="GroupMessages">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="Contents" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreateOn" Type="DateTime" Precision="3" />
+          <Property Name="LastModifyBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastModifyOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Groups" Relationship="MayiOAModel.FK_GroupMessages_Users" FromRole="GroupMessages" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="GroupNotice">
+          <Key>
+            <PropertyRef Name="GroupNoticeID" />
+          </Key>
+          <Property Name="GroupNoticeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="NoticeContent" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreateOn" Type="DateTime" Precision="3" />
+          <Property Name="LastModifyBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="SoftDelete" Type="Boolean" />
+          <NavigationProperty Name="Groups" Relationship="MayiOAModel.FK_GroupNotice_Groups" FromRole="GroupNotice" ToRole="Groups" />
+          <NavigationProperty Name="GroupNoticeComments" Relationship="MayiOAModel.FK_GroupNoticeComments_GroupNoticeComments" FromRole="GroupNotice" ToRole="GroupNoticeComments" />
+        </EntityType>
+        <EntityType Name="GroupNoticeComments">
+          <Key>
+            <PropertyRef Name="NoticeCommentID" />
+          </Key>
+          <Property Name="NoticeCommentID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="GroupNoticeID" Type="Int32" Nullable="false" />
+          <Property Name="Contents" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreateOn" Type="DateTime" Precision="3" />
+          <Property Name="LastModifyBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="SoftDelete" Type="Boolean" />
+          <NavigationProperty Name="GroupNotice" Relationship="MayiOAModel.FK_GroupNoticeComments_GroupNoticeComments" FromRole="GroupNoticeComments" ToRole="GroupNotice" />
+        </EntityType>
+        <EntityType Name="GroupResources">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="ResourceName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ResourceUrl" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreateOn" Type="DateTime" Precision="3" />
+          <Property Name="LastModifyBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="SoftDelete" Type="Boolean" />
+          <NavigationProperty Name="Groups" Relationship="MayiOAModel.FK_GroupResources_Groups" FromRole="GroupResources" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="GroupType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="IsHidden" Type="Boolean" Nullable="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreateOn" Type="DateTime" Precision="3" />
+          <Property Name="LastModifyBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="SoftDelete" Type="Boolean" />
+          <NavigationProperty Name="Clients" Relationship="MayiOAModel.FK_Groups_Clients" FromRole="Groups" ToRole="Clients" />
+          <NavigationProperty Name="GroupMessages" Relationship="MayiOAModel.FK_GroupMessages_Users" FromRole="Groups" ToRole="GroupMessages" />
+          <NavigationProperty Name="GroupNotice" Relationship="MayiOAModel.FK_GroupNotice_Groups" FromRole="Groups" ToRole="GroupNotice" />
+          <NavigationProperty Name="GroupResources" Relationship="MayiOAModel.FK_GroupResources_Groups" FromRole="Groups" ToRole="GroupResources" />
+          <NavigationProperty Name="GroupUsers" Relationship="MayiOAModel.FK_GroupUsers_Groups1" FromRole="Groups" ToRole="GroupUsers" />
+          <Property Type="Int32" Name="CreateUserID" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="MayiOAModel.FK_Groups_Users" FromRole="Groups" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="GroupUsers">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreateOn" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Groups" Relationship="MayiOAModel.FK_GroupUsers_Groups1" FromRole="GroupUsers" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NickName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Avatar" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Department" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreateOn" Type="DateTime" Precision="3" />
+          <Property Name="LastModifyBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="SoftDelete" Type="Boolean" />
+          <Property Name="QQ" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Weibo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Wechat" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Clients" Relationship="MayiOAModel.FK_Users_Clients" FromRole="Users" ToRole="Clients" />
+          <NavigationProperty Name="Groups" Relationship="MayiOAModel.FK_Groups_Users" FromRole="Users" ToRole="Groups" />
+        </EntityType>
+        <Association Name="FK_Groups_Clients">
+          <End Role="Clients" Type="MayiOAModel.Clients" Multiplicity="1" />
+          <End Role="Groups" Type="MayiOAModel.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Clients">
+          <End Role="Clients" Type="MayiOAModel.Clients" Multiplicity="1" />
+          <End Role="Users" Type="MayiOAModel.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupMessages_Users">
+          <End Role="Groups" Type="MayiOAModel.Groups" Multiplicity="1" />
+          <End Role="GroupMessages" Type="MayiOAModel.GroupMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupMessages">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupNotice_Groups">
+          <End Role="Groups" Type="MayiOAModel.Groups" Multiplicity="1" />
+          <End Role="GroupNotice" Type="MayiOAModel.GroupNotice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupNotice">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupNoticeComments_GroupNoticeComments">
+          <End Role="GroupNotice" Type="MayiOAModel.GroupNotice" Multiplicity="1" />
+          <End Role="GroupNoticeComments" Type="MayiOAModel.GroupNoticeComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupNotice">
+              <PropertyRef Name="GroupNoticeID" />
+            </Principal>
+            <Dependent Role="GroupNoticeComments">
+              <PropertyRef Name="GroupNoticeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupResources_Groups">
+          <End Role="Groups" Type="MayiOAModel.Groups" Multiplicity="1" />
+          <End Role="GroupResources" Type="MayiOAModel.GroupResources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupResources">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupUsers_Groups1">
+          <End Role="Groups" Type="MayiOAModel.Groups" Multiplicity="1" />
+          <End Role="GroupUsers" Type="MayiOAModel.GroupUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupUsers">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Users">
+          <End Type="MayiOAModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="MayiOAModel.Groups" Role="Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="CreateUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MayiOAModelStoreContainer" CdmEntityContainer="MayiOAEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="MayiOAModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+                <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupMessages">
+            <EntityTypeMapping TypeName="MayiOAModel.GroupMessages">
+              <MappingFragment StoreEntitySet="GroupMessages">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+                <ScalarProperty Name="LastModifyOn" ColumnName="LastModifyOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupNotice">
+            <EntityTypeMapping TypeName="MayiOAModel.GroupNotice">
+              <MappingFragment StoreEntitySet="GroupNotice">
+                <ScalarProperty Name="GroupNoticeID" ColumnName="GroupNoticeID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="NoticeContent" ColumnName="NoticeContent" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+                <ScalarProperty Name="LastModifyOn" ColumnName="LastModifyOn" />
+                <ScalarProperty Name="SoftDelete" ColumnName="SoftDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupNoticeComments">
+            <EntityTypeMapping TypeName="MayiOAModel.GroupNoticeComments">
+              <MappingFragment StoreEntitySet="GroupNoticeComments">
+                <ScalarProperty Name="NoticeCommentID" ColumnName="NoticeCommentID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="GroupNoticeID" ColumnName="GroupNoticeID" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+                <ScalarProperty Name="LastModifyOn" ColumnName="LastModifyOn" />
+                <ScalarProperty Name="SoftDelete" ColumnName="SoftDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupResources">
+            <EntityTypeMapping TypeName="MayiOAModel.GroupResources">
+              <MappingFragment StoreEntitySet="GroupResources">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
+                <ScalarProperty Name="ResourceUrl" ColumnName="ResourceUrl" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+                <ScalarProperty Name="LastModifyOn" ColumnName="LastModifyOn" />
+                <ScalarProperty Name="SoftDelete" ColumnName="SoftDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="MayiOAModel.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="CreateUserID" ColumnName="CreateUserID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="IsHidden" ColumnName="IsHidden" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+                <ScalarProperty Name="LastModifyOn" ColumnName="LastModifyOn" />
+                <ScalarProperty Name="SoftDelete" ColumnName="SoftDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupUsers">
+            <EntityTypeMapping TypeName="MayiOAModel.GroupUsers">
+              <MappingFragment StoreEntitySet="GroupUsers">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MayiOAModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MayiOAModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="LastModifyBy" ColumnName="LastModifyBy" />
+                <ScalarProperty Name="LastModifyOn" ColumnName="LastModifyOn" />
+                <ScalarProperty Name="SoftDelete" ColumnName="SoftDelete" />
+                <ScalarProperty Name="QQ" ColumnName="QQ" />
+                <ScalarProperty Name="Weibo" ColumnName="Weibo" />
+                <ScalarProperty Name="Wechat" ColumnName="Wechat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

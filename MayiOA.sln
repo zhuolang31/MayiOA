@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MayiOA.Core", "MayiOA.Core\MayiOA.Core.csproj", "{6B50BA3E-4912-49FD-B522-44F55A179DC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MayiOA.Web", "MayiOA.Web\MayiOA.Web.csproj", "{8CAC0951-9392-4BA4-8A1A-91F9C8A89D62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{952085F9-9A2B-4B37-81CF-0C858AB7FF8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{06B1C367-BB69-4CE2-A5D0-7B034C288FD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{7499524B-41BF-4342-BF66-3A2E3E4B7DB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MayiOA.Entities", "MayiOA.Entities\MayiOA.Entities.csproj", "{9A83A8BD-9B66-4D34-927A-44CF4D82FB2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B50BA3E-4912-49FD-B522-44F55A179DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B50BA3E-4912-49FD-B522-44F55A179DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B50BA3E-4912-49FD-B522-44F55A179DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B50BA3E-4912-49FD-B522-44F55A179DC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CAC0951-9392-4BA4-8A1A-91F9C8A89D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CAC0951-9392-4BA4-8A1A-91F9C8A89D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CAC0951-9392-4BA4-8A1A-91F9C8A89D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CAC0951-9392-4BA4-8A1A-91F9C8A89D62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A83A8BD-9B66-4D34-927A-44CF4D82FB2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A83A8BD-9B66-4D34-927A-44CF4D82FB2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A83A8BD-9B66-4D34-927A-44CF4D82FB2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A83A8BD-9B66-4D34-927A-44CF4D82FB2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9A83A8BD-9B66-4D34-927A-44CF4D82FB2B} = {952085F9-9A2B-4B37-81CF-0C858AB7FF8B}
+		{6B50BA3E-4912-49FD-B522-44F55A179DC5} = {06B1C367-BB69-4CE2-A5D0-7B034C288FD8}
+		{8CAC0951-9392-4BA4-8A1A-91F9C8A89D62} = {7499524B-41BF-4342-BF66-3A2E3E4B7DB7}
+	EndGlobalSection
+EndGlobal

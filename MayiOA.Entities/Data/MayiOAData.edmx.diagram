@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1da8d688afaa480e9d4748ecee81f845" Name="Diagram1">
+        <EntityTypeShape EntityType="MayiOAModel.Clients" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MayiOAModel.GroupMessages" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MayiOAModel.GroupNotice" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MayiOAModel.GroupNoticeComments" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MayiOAModel.GroupResources" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MayiOAModel.Groups" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MayiOAModel.GroupUsers" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MayiOAModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MayiOAModel.Users" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+        <AssociationConnector Association="MayiOAModel.FK_Groups_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="MayiOAModel.FK_Users_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="MayiOAModel.FK_GroupMessages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="MayiOAModel.FK_GroupNotice_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="MayiOAModel.FK_GroupNoticeComments_GroupNoticeComments" ManuallyRouted="false" />
+        <AssociationConnector Association="MayiOAModel.FK_GroupResources_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="MayiOAModel.FK_GroupUsers_Groups1" ManuallyRouted="false" />
+        <AssociationConnector Association="MayiOAModel.FK_Groups_Users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
